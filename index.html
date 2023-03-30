@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Etch A Sketch</h1>
+
+    <button class="open-canvas">Open Canvas</button>
+    <form>
+      <input type="range" min="16" max="64" step="1" class="canvas-size" />
+      <input type="range" min="16" max="64" step="1" class="block-size" />
+      <input type="color" />
+    </form>
+
+    <div class="container"></div>
+
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      h1 {
+        background-color: aquamarine;
+        margin: 0;
+      }
+
+      .container {
+        display: grid;
+        justify-content: center;
+      }
+
+      .grid-item {
+        width: 10px;
+        height: 10px;
+        background-color: black;
+      }
+    </style>
+
+    <script>
+      const container = document.querySelector(".container");
+      const open_canvas = document.querySelector(".open-canvas");
+      const canvas_size_input = document.querySelector(".canvas-size");
+      const block_size_input = document.querySelector(".block-size");
+      const color = document.querySelector('[type ="color"]');
+
+      let block_size = 10;
+      let size = 16;
+
+      function setCanvasSize() {
+        size = this.value;
+      }
+
+      function setBlockSize() {
+
+      }
+      
+      function setColor() {
+        console.log(this.value);
+      }
+
+      function gridSize(size) {
+        container.style.gridTemplateColumns = `repeat(${size}, auto)`;
+
+        for (let i = 0; i < size * size; i++) {
+          let newDiv = document.createElement("div");
+          newDiv.classList.add("grid-item");
+          container.appendChild(newDiv);
+          console.log(i);
+        }
+      }
+
+      open_canvas.addEventListener("click", () => gridSize(size));
+      canvas_size_input.addEventListener("change", setCanvasSize);
+      block_size_input.addEventListener("change", setBlockSize);
+      color.addEventListener("change", setColor);
+    </script>
+  </body>
+</html>
