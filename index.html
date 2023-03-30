@@ -12,7 +12,7 @@
     <button class="open-canvas">Open Canvas</button>
     <form>
       <input type="range" min="16" max="64" step="1" class="canvas-size" />
-      <input type="range" min="16" max="64" step="1" class="block-size" />
+      <input type="range" min="10" max="100" step="5" class="block-size" />
       <input type="color" />
     </form>
 
@@ -43,6 +43,7 @@
         width: 10px;
         height: 10px;
         background-color: black;
+        border: 1px solid red;
       }
     </style>
 
@@ -61,9 +62,9 @@
       }
 
       function setBlockSize() {
-
+        document.querySelectorAll(".grid-item").style.width = this.value;
       }
-      
+
       function setColor() {
         console.log(this.value);
       }
