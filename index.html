@@ -9,18 +9,36 @@
   <body>
     <h1>Etch A Sketch</h1>
 
-    <button class="open-canvas">Open Canvas</button>
-    <form>
-      <div class="canvas-size-text">16 x 16</div>
-      <input type="range" min="1" max="64" step="1" class="canvas-size" />
-      <div class="block-size-text">10 x 10</div>
-      <input type="range" min="10" max="100" step="5" class="block-size" />
-      <input type="color" />
-    </form>
+    <main>
+      <div class="canvas-settings">
+        <form>
+          <div class="canvas-size-text">16 x 16</div>
+          <input
+            type="range"
+            min="1"
+            max="64"
+            step="1"
+            value="16"
+            class="canvas-size"
+          />
+          <input type="color" value="#79dbba" />
+          <button class="color-rainbow">Rainbow</button>
+          <button class="open-canvas" type="submit">Open Canvas</button>
+        </form>
+      </div>
+      <div class="container"></div>
+    </main>
 
-    <div class="container"></div>
+    <footer>Thank you! :)</footer>
 
     <style>
+      main {
+        display: flex;
+        justify-content: center;
+        gap: 10%;
+        margin: 10px;
+      }
+
       html {
         margin: 0;
         padding: 0;
@@ -32,22 +50,39 @@
       }
 
       h1 {
-        background-color: aquamarine;
+        background-color: #79dbba;
         margin: 0;
       }
 
+      form {
+        display: flex;
+        flex-direction: column;
+        height: 400px;
+        justify-content: center;
+      }
+
+      .canvas-settings {
+        display: flex;
+        flex-direction: column;
+      }
       .container {
         display: grid;
         justify-content: center;
-        width: 100px;
-        height: 100px;
+        width: 500px;
+        height: 500px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
       }
 
       .grid-item {
         width: auto;
         height: auto;
-        background-color: black;
-        border: 1px solid red;
+        border: 0.01px solid rgba(0, 0, 0, 0.35);
+      }
+
+      .grid-item.color {
+        width: auto;
+        height: auto;
+        border: 0.01px solid rgba(0, 0, 0, 0.35);
       }
     </style>
 
@@ -55,45 +90,57 @@
       const container = document.querySelector(".container");
       const open_canvas = document.querySelector(".open-canvas");
       const canvas_size_input = document.querySelector(".canvas-size");
-      const block_size_input = document.querySelector(".block-size");
-      const color = document.querySelector('[type ="color"]');
+      const pick_color = document.querySelector('[type ="color"]');
       const canvas_size_text = document.querySelector(".canvas-size-text");
+      const color_rainbow = document.querySelector(".color-rainbow");
 
-      let block_size = 10;
       let size = 16;
+      let color = "#79dbba";
 
-      isCanvasOpen = false;
+      function openCanvas() {
+        container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+        for (let i = 0; i < size * size; i++) {
+          let newDiv = document.createElement("div");
+          newDiv.classList.add("grid-item");
+          container.appendChild(newDiv);
+        }
+      }
+
+      openCanvas();
 
       function setCanvasSize() {
         size = this.value;
         canvas_size_text.innerHTML = `${this.value} x ${this.value}`;
       }
 
-      function setBlockSize() {
-        document.querySelectorAll(".grid-item").style.width = this.value;
-      }
-
       function setColor() {
-        console.log(this.value);
+        color = this.value;
       }
 
-      function gridSize(size) {
-        if (isCanvasOpen == false) {
-          container.style.gridTemplateColumns = `repeat(${size}, auto)`;
-          for (let i = 0; i < size * size; i++) {
-            let newDiv = document.createElement("div");
-            newDiv.classList.add("grid-item");
-            container.appendChild(newDiv);
-            console.log(i);
-          }
-          isCanvasOpen = true;
+      function colorRainbow(e) {
+        e.preventDefault();
+        console.log("rainbow");
+      }
+
+      function gridSize(e) {
+        e.preventDefault();
+        container.innerHTML = "";
+        container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
+
+        for (let i = 0; i < size * size; i++) {
+          let newDiv = document.createElement("div");
+          newDiv.classList.add("grid-item");
+          container.appendChild(newDiv);
         }
       }
 
-      open_canvas.addEventListener("click", () => gridSize(size));
+      open_canvas.addEventListener("click", (e) => gridSize(e));
       canvas_size_input.addEventListener("change", setCanvasSize);
-      block_size_input.addEventListener("change", setBlockSize);
-      color.addEventListener("change", setColor);
+      pick_color.addEventListener("change", setColor);
+      color_rainbow.addEventListener("click", (e) => colorRainbow(e));
+
+      
     </script>
   </body>
 </html>
