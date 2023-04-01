@@ -27,7 +27,9 @@
 
           <button class="color-rainbow">Rainbow</button>
 
-          <button class="open-canvas" type="submit">Open Canvas</button>
+          <button class="open-canvas" type="submit">Resize Canvas</button>
+
+          <button class="clear-canvas" type="submit">Clear Canvas</button>
         </form>
       </div>
       <div class="container"></div>
@@ -122,6 +124,7 @@
       const canvas_size_text = document.querySelector(".canvas-size-text");
       const color_rainbow = document.querySelector(".color-rainbow");
       const color_mode = document.querySelector(".color-mode");
+      const clear_canvas = document.querySelector(".clear-canvas");
 
       let size = 16;
       let color = "#79dbba";
@@ -164,6 +167,13 @@
         isRainbow = true;
       }
 
+      function clearCanvas(e) {
+        e.preventDefault();
+
+        let canvas = document.querySelectorAll(".grid-item");
+        canvas.forEach((canvas) => (canvas.style.backgroundColor = `white`));
+      }
+
       function gridSize(e) {
         e.preventDefault();
         container.innerHTML = "";
@@ -198,7 +208,7 @@
       pick_color.addEventListener("change", setColor);
       color_rainbow.addEventListener("click", (e) => colorRainbow(e));
       color_mode.addEventListener("click", (e) => setColorMode(e));
-
+      clear_canvas.addEventListener("click", (e) => clearCanvas(e));
     </script>
   </body>
 </html>
