@@ -23,14 +23,17 @@
           />
           <input class="color" type="color" value="#79dbba" />
 
+          <button class="color-mode">Color</button>
+
           <button class="color-rainbow">Rainbow</button>
+
           <button class="open-canvas" type="submit">Open Canvas</button>
         </form>
       </div>
       <div class="container"></div>
     </main>
 
-    <footer>Thank you! :)</footer>
+    <footer><a href="https://github.com/GrzegorzWK">Thank you! :)</a></footer>
 
     <style>
       main {
@@ -101,6 +104,14 @@
         width: auto;
         height: auto;
       }
+
+      footer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 2.5rem;
+        text-align: center;
+      }
     </style>
 
     <script>
@@ -110,9 +121,11 @@
       const pick_color = document.querySelector('[type ="color"]');
       const canvas_size_text = document.querySelector(".canvas-size-text");
       const color_rainbow = document.querySelector(".color-rainbow");
+      const color_mode = document.querySelector(".color-mode");
 
       let size = 16;
       let color = "#79dbba";
+      let isRainbow = false;
 
       function openCanvas() {
         container.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
@@ -138,11 +151,17 @@
 
       function setColor() {
         color = this.value;
+        isRainbow = false;
+      }
+
+      function setColorMode(e) {
+        e.preventDefault();
+        isRainbow = false;
       }
 
       function colorRainbow(e) {
         e.preventDefault();
-        console.log("rainbow");
+        isRainbow = true;
       }
 
       function gridSize(e) {
@@ -163,13 +182,23 @@
       }
 
       function painting() {
-        this.style.backgroundColor = `${color}`;
+        if (isRainbow == false) {
+          this.style.backgroundColor = `${color}`;
+        } else {
+          const randomR = Math.floor(Math.random() * 256);
+          const randomG = Math.floor(Math.random() * 256);
+          const randomB = Math.floor(Math.random() * 256);
+
+          this.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+        }
       }
 
       open_canvas.addEventListener("click", (e) => gridSize(e));
       canvas_size_input.addEventListener("change", setCanvasSize);
       pick_color.addEventListener("change", setColor);
       color_rainbow.addEventListener("click", (e) => colorRainbow(e));
+      color_mode.addEventListener("click", (e) => setColorMode(e));
+
     </script>
   </body>
 </html>
