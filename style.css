@@ -1,0 +1,95 @@
+header {
+  text-align: center;
+}
+
+.header {
+  text-decoration: none;
+  color: #a79e9e;
+  text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+  height: 5vh;
+}
+
+main {
+  height: 90vh;
+  display: flex;
+  justify-content: center;
+  gap: 10%;
+  padding: 10px;
+  background-color: #a79e9e;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  background-color: #79dbba;
+  margin: 0;
+}
+
+.footer {
+  background-color: #79dbba;
+  height: 5vh;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: center;
+  gap: 5%;
+  align-items: center;
+}
+
+.color {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 75px;
+  height: 75px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.color::-webkit-color-swatch {
+  border-radius: 15px;
+  border: none;
+}
+
+.color::-moz-color-swatch {
+  border-radius: 15px;
+  border: none;
+}
+
+.canvas-settings {
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  display: grid;
+  justify-content: center;
+  width: 500px;
+  height: 500px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.grid-item {
+  width: auto;
+  height: auto;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2.5rem;
+  text-align: center;
+}
