@@ -7,7 +7,7 @@
     <title>Document</title>
   </head>
   <body>
-    <h1>Etch A Sketch</h1>
+    <header><h1 class="header">Etch A Sketch</h1></header>
 
     <main>
       <div class="canvas-settings">
@@ -35,14 +35,29 @@
       <div class="container"></div>
     </main>
 
-    <footer><a href="https://github.com/GrzegorzWK">Thank you! :)</a></footer>
+    <footer class="footer">
+      <a class="header" href="https://github.com/GrzegorzWK">Thank you! :)</a>
+    </footer>
 
     <style>
+      header {
+        text-align: center;
+      }
+
+      .header {
+        text-decoration: none;
+        color: #a79e9e;
+        text-shadow: 1px 0 0 #000, 0 -1px 0 #000, 0 1px 0 #000, -1px 0 0 #000;
+        height: 5vh;
+      }
+
       main {
+        height: 90vh;
         display: flex;
         justify-content: center;
         gap: 10%;
-        margin: 10px;
+        padding: 10px;
+        background-color: #a79e9e;
       }
 
       html {
@@ -60,12 +75,18 @@
         margin: 0;
       }
 
+      .footer {
+        background-color: #79dbba;
+        height: 5vh;
+      }
+
       form {
         display: flex;
         flex-direction: column;
         height: 500px;
         justify-content: center;
         gap: 5%;
+        align-items: center;
       }
 
       .color {
@@ -143,6 +164,7 @@
         canvas.forEach((canvas) =>
           canvas.addEventListener("mouseover", painting)
         );
+        canvas.forEach((canvas) => (canvas.style.backgroundColor = `white`));
       }
 
       openCanvas();
@@ -154,6 +176,8 @@
 
       function setColor() {
         color = this.value;
+        document.querySelector(".header").style.backgroundColor = this.value;
+        document.querySelector(".footer").style.backgroundColor = this.value;
         isRainbow = false;
       }
 
@@ -189,6 +213,7 @@
         canvas.forEach((canvas) =>
           canvas.addEventListener("mouseover", painting)
         );
+        canvas.forEach((canvas) => (canvas.style.backgroundColor = `white`));
       }
 
       function painting() {
@@ -200,6 +225,8 @@
           const randomB = Math.floor(Math.random() * 256);
 
           this.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+          document.querySelector(".header").style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
+          document.querySelector(".footer").style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
         }
       }
 
