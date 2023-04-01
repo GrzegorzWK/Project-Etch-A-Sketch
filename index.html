@@ -21,7 +21,8 @@
             value="16"
             class="canvas-size"
           />
-          <input type="color" value="#79dbba" />
+          <input class="color" type="color" value="#79dbba" />
+
           <button class="color-rainbow">Rainbow</button>
           <button class="open-canvas" type="submit">Open Canvas</button>
         </form>
@@ -57,14 +58,37 @@
       form {
         display: flex;
         flex-direction: column;
-        height: 400px;
+        height: 500px;
         justify-content: center;
+        gap: 5%;
+      }
+
+      .color {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        appearance: none;
+        width: 75px;
+        height: 75px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+      }
+
+      .color::-webkit-color-swatch {
+        border-radius: 15px;
+        border: none;
+      }
+
+      .color::-moz-color-swatch {
+        border-radius: 15px;
+        border: none;
       }
 
       .canvas-settings {
         display: flex;
         flex-direction: column;
       }
+
       .container {
         display: grid;
         justify-content: center;
@@ -76,13 +100,6 @@
       .grid-item {
         width: auto;
         height: auto;
-        border: 0.01px solid rgba(0, 0, 0, 0.35);
-      }
-
-      .grid-item.color {
-        width: auto;
-        height: auto;
-        border: 0.01px solid rgba(0, 0, 0, 0.35);
       }
     </style>
 
@@ -105,6 +122,11 @@
           newDiv.classList.add("grid-item");
           container.appendChild(newDiv);
         }
+
+        let canvas = document.querySelectorAll(".grid-item");
+        canvas.forEach((canvas) =>
+          canvas.addEventListener("mouseover", painting)
+        );
       }
 
       openCanvas();
@@ -133,14 +155,21 @@
           newDiv.classList.add("grid-item");
           container.appendChild(newDiv);
         }
+
+        let canvas = document.querySelectorAll(".grid-item");
+        canvas.forEach((canvas) =>
+          canvas.addEventListener("mouseover", painting)
+        );
+      }
+
+      function painting() {
+        this.style.backgroundColor = `${color}`;
       }
 
       open_canvas.addEventListener("click", (e) => gridSize(e));
       canvas_size_input.addEventListener("change", setCanvasSize);
       pick_color.addEventListener("change", setColor);
       color_rainbow.addEventListener("click", (e) => colorRainbow(e));
-
-      
     </script>
   </body>
 </html>
